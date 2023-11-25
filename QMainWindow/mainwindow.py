@@ -1,4 +1,6 @@
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtCore import QSize
+from PySide6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import QMainWindow, QToolBar
 
 
 class MainWindow(QMainWindow):
@@ -27,5 +29,31 @@ class MainWindow(QMainWindow):
         menu_bar.addMenu("Setting")
         menu_bar.addMenu("Help")
 
+
+        # Working with toolbars
+        toolbar = QToolBar("My main toolbar")
+        toolbar.setIconSize(QSize(16, 16))
+        self.addToolBar(toolbar)
+
+        # Add the quit action to the toolbar
+        toolbar.addAction(quit_action)
+
+        # Creating an action in a toolbar
+        action1 = QAction("Some Action", self)
+        action1.setStatusTip("Status message for some action")
+        action1.triggered.connect(self.toolbar_button_click)
+        toolbar.addAction(action1)
+
+        action2 = QAction(QIcon("start.png"), "Some other Action", self)
+        action2.setStatusTip("Status message for some other action")
+        action2.triggered.connect(self.toolbar_button_click)
+        action2.setCheckable(True)
+        toolbar.addAction(action2)
+
+
     def quit_app(self):
         self.app.quit()
+    
+
+    def toolbar_button_click(self):
+        print("Action triggered!")
