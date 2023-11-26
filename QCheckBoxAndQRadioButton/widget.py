@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QGroupBox, QCheckBox, QHBoxLayout, QVBoxLayout, QButtonGroup
+from PySide6.QtWidgets import QWidget, QGroupBox, QCheckBox, QHBoxLayout, QVBoxLayout, QButtonGroup, QRadioButton
 
 
 class Widget(QWidget):
@@ -45,11 +45,31 @@ class Widget(QWidget):
         drink_layout.addWidget(coffee)
         drinks.setLayout(drink_layout)
 
-        layout = QHBoxLayout()
-        layout.addWidget(os)
-        layout.addWidget(drinks)
+        #Radio buttons: answers
+        answers =  QGroupBox("Choose Answer")
+        answer_a = QRadioButton("A")
+        answer_b = QRadioButton("B")
+        answer_c = QRadioButton("C")
+        answer_a.setChecked(True)
 
-        self.setLayout(layout)
+        answer_layout = QVBoxLayout()
+        answer_layout.addWidget(answer_a)
+        answer_layout.addWidget(answer_b)
+        answer_layout.addWidget(answer_c)
+        answers.setLayout(answer_layout)
+
+
+        h_layout = QHBoxLayout()
+        h_layout.addWidget(os)
+        h_layout.addWidget(drinks)
+        #layout.addWidget(answers)
+
+        v_layout = QVBoxLayout()
+        v_layout.addLayout(h_layout)
+        v_layout.addWidget(answers)
+
+
+        self.setLayout(v_layout)
 
 
     #Slots
